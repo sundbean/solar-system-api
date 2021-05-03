@@ -9,7 +9,7 @@ def handle_planet():
     
     request_body = request.get_json()
 
-    new_planet - Planet(name=request_body['name'], description=request_body['description'], size=request_body['size'])
+    new_planet = Planet(name=request_body['name'], description=request_body['description'], size=request_body['size'])
 
     db.session.add(new_planet)
     db.session.commit()
