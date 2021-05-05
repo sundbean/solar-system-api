@@ -41,7 +41,7 @@ def handle_planets():
 
         return jsonify(planets_response)
 
-@planets_bp.route("/<planet_id>", methods=["GET", "PUT"])
+@planets_bp.route("/<planet_id>", methods=["GET", "PUT", "PATCH"])
 def handle_planet(planet_id):
 
     planet = Planet.query.get(planet_id)
@@ -69,6 +69,27 @@ def handle_planet(planet_id):
         planet.year_length_in_earth_days = request_body['year_length_in_earth_days']
         planet.average_temp = request_body['average_temp']
 
+        db.session.commit()
+
+        return make_response(f"Planet {planet.id} successfully updated")
+
+    elif request.method == "PATCH":
+
+        request_body = request.get_json()
+
+        if 'name' in request_body:
+            planet.name = request_body['name']
+        if 'description' in request_body:
+            planet.description = request_body['description']
+        if 'radius_in_miles' in request_body:
+            planet.radius_in_miles = request_body['radius_in_miles']
+        if 'day_length_in_hours' in request_body:
+            planet.day_length_in_hours = request_body['day_length_in_hours']
+        if 'year_length_in_earth_days' in request_body:
+            planet.year_length_in_earth_days = request_body['year_length_in_earth_days']
+        if 'average_temp' in request_body:
+            planet.average_temp = request_body['average_temp']
+    
         db.session.commit()
 
         return make_response(f"Planet {planet.id} successfully updated")
