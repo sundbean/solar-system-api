@@ -41,7 +41,7 @@ def handle_planets():
 
         return jsonify(planets_response)
 
-@planets_bp.route("/<planet_id>", methods=["GET", "PUT", "PATCH"])
+@planets_bp.route("/<planet_id>", methods=["GET", "PUT", "PATCH", "DELETE"])
 def handle_planet(planet_id):
 
     planet = Planet.query.get(planet_id)
@@ -93,3 +93,10 @@ def handle_planet(planet_id):
         db.session.commit()
 
         return make_response(f"Planet {planet.id} successfully updated")
+    
+    elif request.method == "DELETE":
+
+        db.session.delete(planet)
+        db.session.commit()
+
+        return make_response(f"Planet {planet.id} successfully deleted")
