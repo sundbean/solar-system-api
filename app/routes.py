@@ -33,7 +33,10 @@ def handle_planet():
                 "id": planet.id,
                 "name": planet.name,
                 "description": planet.description,
-                "size": planet.size
+                "radius_in_miles": planet.radius_in_miles,
+                "day_length_in_hours": planet.day_length_in_hours,
+                "year_length_in_earth_days": planet.year_length_in_earth_days,
+                "average_temp": planet.average_temp
             })
 
-            return jsonify(planets_response)
+        return jsonify(planets_response)
