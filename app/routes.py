@@ -11,7 +11,12 @@ def handle_planet():
     
         request_body = request.get_json()
 
-        new_planet = Planet(name=request_body['name'], description=request_body['description'], size=request_body['size'])
+        new_planet = Planet(name=request_body['name'], 
+                            description=request_body['description'],
+                            radius_in_miles=request_body['radius_in_miles'],
+                            day_length_in_hours=request_body['day_length_in_hours'],
+                            year_length_in_earth_days=request_body['year_length_in_earth_days'],
+                            average_temp=request_body['average_temp'])
 
         db.session.add(new_planet)
         db.session.commit()
